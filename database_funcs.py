@@ -100,13 +100,13 @@ def upload_csv(name, file, exists, db, head = 0):
         print(ex)
         return ex
 
-def pandas_select_query(s,db):
+def pandas_select_query(s,db, ok=False):
     # Returns a df for the select query
-    if s.split(" ")[0].upper() == "SELECT":
+   if s.split(" ")[0].lower() == "SELECT" or ok:
         try:
             df = pd.read_sql_query(s, get_conn(db))
             return df
         except Exception as ex:
             print(ex)
             return ex
-    raise Exception("Yo Dude this is for SELECT queries none of this other crap")
+   raise Exception("Yo Dude this is for SELECT queries none of this other crap")
